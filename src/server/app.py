@@ -7,7 +7,7 @@ load_dotenv()
 name = os.getenv("NAME")
 email = os.getenv("EMAIL")
 
-@app.route('/getpi', methods=['GET'])
+@app.route('/api/getpi', methods=['GET'])
 def getpi():
     if request.method == 'GET':
         try:
