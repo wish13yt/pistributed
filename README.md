@@ -3,6 +3,10 @@ distributed pi calculation
 # Disclaimer
 Do not run on systems owned by another entity, entities, person, or people, without explicit permission from them.
 <br>
+Make sure you trust servers you connect to! I do not control any of them and am not responsible for anything on external websites and/or servers.
+<br>
+For server owners: Security is not guarenteed. I am not responsible for ANY damages or attempts of damages to ANY computer, phone, or device running Pistributed's client or server.
+<br>
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
