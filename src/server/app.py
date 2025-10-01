@@ -46,16 +46,32 @@ def lander():
         if piresult == "No clients have connected yet. Become one of the first!":
             piresult = "No clients have connected. Become one of the first!"
         else:
-            piresult = "Current Pi count is " + piresult
+            try:
+                pilength = len(str(piresult))
+                print(pilength)
+                pilen = "Current Pi length is " + str(pilength)
+            except:
+                pilen = "Current Pi length couldn't be calculated!"
+            piresult = "Current Pi count is " + piresult + " digits!"
     except:
         piresult = "picalc/pi.txt wasn't found on this web server. Sorry!"
     if request.method == 'GET':
         ver = open("ver.txt", "r")
         version = ver.read()
-        return render_template('index.html', pi=piresult, name=name, email=email, version=version)
+        return render_template('index.html', pi=piresult, name=name, email=email, version=version, pilen=pilen)
     else:
         return "Please use GET to access this page."
 
+@app.route('/api/getlen')
+def getlen():
+    f = open("picalc/pi.txt", "r")
+    piresult = f.read()
+    try:
+        pilength = len(str(piresult))
+        return str(pilength)
+    except:
+        return "Pi length couldn't be found!"
+    
 @app.route('/api/getver')
 def getver():
     try:
