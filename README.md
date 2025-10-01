@@ -1,5 +1,15 @@
 # pistributed
 distributed pi calculation
+# Guide
+Download the server from the latest release.
+
+Then, make sure you have flask & python-dotenv installed.
+
+Run setup.py in the server directory.
+
+Last, run the server with flask run!
+
+Have a client connect to your server and let the Pi begin!
 # Disclaimer
 Do not run on systems owned by another entity, entities, person, or people, without explicit permission from them.
 <br>
