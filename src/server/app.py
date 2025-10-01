@@ -21,12 +21,22 @@ def getpi():
     
 @app.route('/api/postpi', methods=['POST', 'GET'])
 def postpi():
+    f = open("picalc/pi.txt", "r")
     if request.form['pi']:
-        if request.form['pi'].startswith("3.14") == True:
-            with open("picalc/pi.txt", "w") as f:
-                f.write(request.form['pi'])
+        if f.read() == "No clients have connected yet. Become one of the first!":
+            if request.form['pi'].startswith("3.14") == True:
+                with open("picalc/pi.txt", "w") as f:
+                    f.write(request.form['pi'])
+            else:
+                return "Invalid string!"
         else:
-            return "Invalid string!"
+            if request.form['pi'].startswith(f.read()) == True:
+                with open("picalc/pi.txt", "w") as f:
+                    f.write(request.form['pi'])
+            else:
+                return "Invalid string!"
+    else:
+        return "Request not found!"
 
 @app.route('/')
 def lander():
@@ -45,6 +55,15 @@ def lander():
         return render_template('index.html', pi=piresult, name=name, email=email, version=version)
     else:
         return "Please use GET to access this page."
+
+@app.route('/api/getver')
+def getver():
+    try:
+        f = open("ver.txt", "r")
+        version = f.read()
+        return version
+    except:
+        return "ver.txt not found on server"
     
 @app.errorhandler(404)
 def page_not_found(error):

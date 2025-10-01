@@ -46,6 +46,7 @@ def upload():
                 data = {'pi': str(pi_val)}
                 print(data)
                 response = requests.post(server + "/api/postpi", data=data)
+                print(response.text)
             else:
                 if replen > pilen:
                     print("server pi length is greater than local pi length! not uploading")
@@ -53,6 +54,7 @@ def upload():
                     print("local pi length longer than server pi length! uploading")
                     data = {'pi': str(pi_val)}
                     response = requests.post(server + "/api/postpi", data=data)
+                    print(response.text)
         else:
             print("pi_val not yet defined!")
         time.sleep(60)
