@@ -19,17 +19,14 @@ def getpi():
     else:
         return "Invaild method! /getpi is designed for GET requests, not " + request.method
     
-@app.route('/api/postpi')
+@app.route('/api/postpi', methods=['POST', 'GET'])
 def postpi():
-    if request.method == 'POST':
-        if request.form['pi']:
-            if request.form['pi'].startswith("3.14") == True:
-                with open("picalc/pi.txt", "w") as f:
-                    f.write(request.form['pi'])
-            else:
-                return "Invalid string!"
-    else:
-        return "Invalid method! /postpi is designed for POST requests, not " + request.method
+    if request.form['pi']:
+        if request.form['pi'].startswith("3.14") == True:
+            with open("picalc/pi.txt", "w") as f:
+                f.write(request.form['pi'])
+        else:
+            return "Invalid string!"
 
 @app.route('/')
 def lander():
