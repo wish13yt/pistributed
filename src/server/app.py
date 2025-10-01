@@ -54,6 +54,7 @@ def lander():
             except:
                 pilen = "Current Pi length couldn't be calculated!"
             piresult = "Current Pi count is " + piresult + " digits!"
+        piresult = "Current Pi count is " + piresult + " digits!"
     except:
         piresult = "picalc/pi.txt wasn't found on this web server. Sorry!"
     if request.method == 'GET':
