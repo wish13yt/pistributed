@@ -14,6 +14,7 @@ You should have received a copy of the GNU General Public License along with thi
 print("By continuing, you agree to these terms, disclaimers, and acknowledge that there is NO WARRANTY.")
 input("I agree, and would like to continue. (to continue, press enter) ")
 print("Thanks for confirming! I just need one more thing.")
+print("Make sure you trust the server! I do not control any of them and am not responsible for anything on external websites and/or servers.")
 server = input("What is the server URL that you'd like to connect to? (ex: https://example.com, http://localhost:5000) ")
 print("Alright! Thanks. Let the calculating begin :D (to exit, run ctrl+c or close terminal)")
 print("-------------------")

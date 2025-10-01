@@ -7,6 +7,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.""")
 print("By continuing, you agree to these terms, disclaimers, and acknowledge that there is NO WARRANTY.")
+print("Security is not guarenteed. I am not responsible for ANY damages or attempts of damages to ANY computer, phone, or device running Pistributed's client or server.")
 input("I agree, and would like to continue. (to continue, press enter)")
 email = input("What email would you like to display for server support? THIS WILL BE MADE PUBLIC" )
 called = input("What would you like to be called? (ex: Wish) THIS WILL BE MADE PUBLIC ")
