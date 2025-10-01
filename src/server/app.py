@@ -2,7 +2,8 @@ from flask import request, Flask # requires flask! please download before runnin
 from flask import render_template
 from dotenv import load_dotenv
 import os
-
+global pilen
+global pilength
 app = Flask(__name__)
 load_dotenv()
 name = os.getenv("NAME")
