@@ -40,7 +40,9 @@ def lander():
     except:
         piresult = "picalc/pi.txt wasn't found on this web server. Sorry!"
     if request.method == 'GET':
-            return render_template('index.html', pi=piresult, name=name, email=email)
+        ver = open("ver.txt", "r")
+        version = ver.read()
+        return render_template('index.html', pi=piresult, name=name, email=email, version=version)
     else:
         return "Please use GET to access this page."
     
