@@ -8,8 +8,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.""")
 print("By continuing, you agree to these terms, disclaimers, and acknowledge that there is NO WARRANTY.")
 input("I agree, and would like to continue. (to continue, press enter)")
-email = input("What email would you like to display for server support? This can be any email, in fact I recommend NOT using a personal email. ")
-called = input("What would you like to be called? (ex: Wish) ")
+email = input("What email would you like to display for server support? THIS WILL BE MADE PUBLIC" )
+called = input("What would you like to be called? (ex: Wish) THIS WILL BE MADE PUBLIC ")
 print("Thank you! Creating a .env file... Make sure to run server.py when you are ready!")
 with open(".env", "w") as file:
     file.write("EMAIL=" + email + "\nNAME=" + called)

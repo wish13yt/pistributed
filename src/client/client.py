@@ -2,6 +2,7 @@ from math import factorial
 from decimal import Decimal, getcontext
 import time
 import threading
+import requests
 
 print("Pistributed, an app to calculate Pi with distributed power.")
 print("Do not run on systems owned by another entity, entities, person, or people, without explicit permission from them.")
@@ -13,10 +14,11 @@ You should have received a copy of the GNU General Public License along with thi
 print("By continuing, you agree to these terms, disclaimers, and acknowledge that there is NO WARRANTY.")
 input("I agree, and would like to continue. (to continue, press enter) ")
 print("Thanks for confirming! I just need one more thing.")
-server = input("What is the server URL that you'd like to connect to? (ex: example.com) ")
+server = input("What is the server URL that you'd like to connect to? (ex: https://example.com, http://localhost:5000) ")
 print("Alright! Thanks. Let the calculating begin :D (to exit, run ctrl+c or close terminal)")
 print("-------------------")
-
+global pi_val
+pi_val = None
 def calc(n, prec):
     getcontext().prec = prec
     t = Decimal(0)
@@ -32,7 +34,26 @@ def calc(n, prec):
 
 def upload():
     while True:
-        print(">> uploading latest calculation")
+        if str(pi_val).startswith("3.14") == True:
+            print(">> checking and uploading latest calculation")
+            response = requests.get(server + "/api/getpi")
+            print(response.text)
+            replen = len(response.text)
+            pilen = len(str(pi_val))
+            if response.text == "No clients have connected yet. Become one of the first!":
+                print("server pi doesn't exist! uploading")
+                data = {'pi': str(pi_val)}
+                print(data)
+                response = requests.post(server + "/api/postpi", data=data)
+            else:
+                if replen > pilen:
+                    print("server pi length is greater than local pi length! not uploading")
+                elif pilen > replen:
+                    print("local pi length longer than server pi length! uploading")
+                    data = {'pi': str(pi_val)}
+                    response = requests.post(server + "/api/postpi", data=data)
+        else:
+            print("pi_val not yet defined!")
         time.sleep(60)
 
 threading.Thread(target=upload, daemon=True).start()
@@ -45,3 +66,4 @@ while True:
     print(pi_val)
     calculation += 1
     precision += 5
+    time.sleep(5)

@@ -1,4 +1,5 @@
 from flask import request, Flask # requires flask! please download before running :)
+from flask import render_template
 from dotenv import load_dotenv
 import os
 
@@ -21,13 +22,27 @@ def getpi():
 @app.route('/api/postpi')
 def postpi():
     if request.method == 'POST':
-        return "Not Implemented"
+        if request.form['pi']:
+            if request.form['pi'].startswith("3.14") == True:
+                with open("picalc/pi.txt", "w") as f:
+                    f.write(request.form['pi'])
+            else:
+                return "Invalid string!"
     else:
         return "Invalid method! /postpi is designed for POST requests, not " + request.method
 
 @app.route('/')
 def lander():
+    try:
+        f = open("picalc/pi.txt", "r")
+        piresult = f.read()
+        if piresult == "No clients have connected yet. Become one of the first!":
+            piresult = "No clients have connected. Become one of the first!"
+        else:
+            piresult = "Current Pi count is " + piresult
+    except:
+        piresult = "picalc/pi.txt wasn't found on this web server. Sorry!"
     if request.method == 'GET':
-        return "Not implemented"
+            return render_template('index.html', pi=piresult, name=name, email=email)
     else:
         return "Please use GET to access this page."
