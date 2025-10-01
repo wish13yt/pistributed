@@ -58,7 +58,7 @@ def lander():
     if request.method == 'GET':
         ver = open("ver.txt", "r")
         version = ver.read()
-        return render_template('index.html', pi=piresult, name=name, email=email, version=version, pilen=pilen)
+        return render_template('index.html', pi=piresult, name=name, email=email, version=version, pilen=str(pilen))
     else:
         return "Please use GET to access this page."
 
