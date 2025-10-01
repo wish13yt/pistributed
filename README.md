@@ -1,7 +1,7 @@
 # pistributed
 distributed pi calculation
 # Guide
-Download the server from the latest release.
+Download the server from the [latest release](https://github.com/wish13yt/pistributed/releases/latest).
 
 Then, make sure you have flask & python-dotenv installed.
 
