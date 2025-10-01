@@ -59,7 +59,10 @@ def lander():
     if request.method == 'GET':
         ver = open("ver.txt", "r")
         version = ver.read()
-        return render_template('index.html', pi=piresult, name=name, email=email, version=version, pilen=str(pilen))
+        try:
+            return render_template('index.html', pi=piresult, name=name, email=email, version=version, pilen=str(pilen))
+        except:
+            return render_template('index.html', pi=piresult, name=name, email=email, version=version)
     else:
         return "Please use GET to access this page."
 
@@ -67,11 +70,11 @@ def lander():
 def getlen():
     f = open("picalc/pi.txt", "r")
     piresult = f.read()
-    try:
+    if not piresult == "No clients have connected yet. Become one of the first!":
         pilength = len(str(piresult))
         return str(pilength)
-    except:
-        return "Pi length couldn't be found!"
+    else:
+        return "Length cannot be calculated due to Pi not being calculated yet."
     
 @app.route('/api/getver')
 def getver():
