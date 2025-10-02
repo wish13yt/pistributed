@@ -73,11 +73,8 @@ try:
         precision += 5
         time.sleep(5)
 except:
-    try:
-        print("Saving your latest Pi to Pi.txt and exiting...")
-        with open("pi.txt", "w") as f:
-            f.write(str(pi_val))
-        sys.exit()
-    except:
-        print("Unable to save to pi.txt. This could be because pi_val wasn't defined yet. Exiting..")
-        sys.exit()
+    print("\n")
+    print("Saving your latest Pi to Pi.txt and exiting...")
+    with open("pi.txt", "w") as f:
+        f.write(str(pi_val))
+    sys.exit()
