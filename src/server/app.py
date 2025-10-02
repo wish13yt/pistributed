@@ -84,6 +84,16 @@ def getver():
         return version
     except:
         return "ver.txt not found on server"
+
+@app.route('/api/getname')
+def getname():
+    return name
+
+@app.route('/api/getemail')
+def getemail():
+    atEmail = email.replace("@", " at ")
+    safeEmail = atEmail.replace(".", " dot ")
+    return safeEmail
     
 @app.errorhandler(404)
 def page_not_found(error):
