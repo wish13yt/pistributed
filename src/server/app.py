@@ -51,10 +51,10 @@ def lander():
             try:
                 pilength = len(str(piresult))
                 print(pilength)
-                pilen = "Current Pi length is " + str(pilength)
+                pilen = "Current Pi length is " + str(pilength) + " digits!"
             except:
                 pilen = "Current Pi length couldn't be calculated!"
-            piresult = "Current Pi count is " + piresult + " digits!"
+            piresult = "Current Pi count is " + piresult
     except:
         piresult = "picalc/pi.txt wasn't found on this web server. Sorry!"
     if request.method == 'GET':
