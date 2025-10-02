@@ -1,7 +1,4 @@
 # Pistributed
-> [!WARNING]
-> 1.1 -> ver.txt will no longer be included in the migration guide after 1.4!
-
 Distributed and decentralized pi calculation
 # Guide
 Download the server from the [latest release](https://github.com/wish13yt/pistributed/releases/latest).
