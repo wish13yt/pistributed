@@ -1,5 +1,7 @@
 # Pistributed
 Distributed and decentralized pi calculation
+
+Tangled users; get Pistributed's client/server from GitHub here: https://github.com/wish13yt/pistributed/releases
 # Guide
 Download the server from the [latest release](https://github.com/wish13yt/pistributed/releases/latest).
 
