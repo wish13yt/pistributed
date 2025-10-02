@@ -8,7 +8,8 @@ app = Flask(__name__)
 load_dotenv()
 name = os.getenv("NAME")
 email = os.getenv("EMAIL")
-
+atEmail = email.replace("@", " at ")
+safeEmail = atEmail.replace(".", " dot ")
 @app.route('/api/getpi')
 def getpi():
     if request.method == 'GET':
@@ -60,9 +61,9 @@ def lander():
         ver = open("ver.txt", "r")
         version = ver.read()
         try:
-            return render_template('index.html', pi=piresult, name=name, email=email, version=version, pilen=str(pilen))
+            return render_template('index.html', pi=piresult, name=name, email=safeEmail, version=version, pilen=str(pilen))
         except:
-            return render_template('index.html', pi=piresult, name=name, email=email, version=version)
+            return render_template('index.html', pi=piresult, name=name, email=safeEmail, version=version)
     else:
         return "Please use GET to access this page."
 
@@ -91,8 +92,6 @@ def getname():
 
 @app.route('/api/getemail')
 def getemail():
-    atEmail = email.replace("@", " at ")
-    safeEmail = atEmail.replace(".", " dot ")
     return safeEmail
     
 @app.errorhandler(404)
