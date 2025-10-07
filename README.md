@@ -1,4 +1,6 @@
 # Pistributed
+> [!NOTE]
+> Python 3.14 has released! 🥳 Pistributed is untested on 3.14 at the moment (ironically). <3
 Distributed and decentralized pi calculation
 
 Tangled users; get Pistributed's client/server from GitHub here: https://github.com/wish13yt/pistributed/releases
