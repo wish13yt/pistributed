@@ -56,7 +56,12 @@ def lander():
                 pilen = "Current Pi length couldn't be calculated!"
             piresult = "Current Pi count is " + piresult
     except:
-        piresult = "picalc/pi.txt wasn't found on this web server. Sorry!"
+        piresult = "picalc/pi.txt wasn't found on this server! It will be created now to fix this issue."
+        try:
+            with open("picalc/pi.txt", "w") as f:
+                f.write("No clients have connected yet. Become one of the first!")
+        except:
+            piresult = f"Couldn't create pi.txt! Please contact {name} at {safeEmail} to fix this!"
     if request.method == 'GET':
         ver = open("ver.txt", "r")
         version = ver.read()
