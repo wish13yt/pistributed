@@ -4,6 +4,7 @@ import time
 import threading
 import requests
 import sys
+import urllib.request
 
 print("Pistributed, an app to calculate Pi with distributed power.")
 print("Do not run on systems owned by another entity, entities, person, or people, without explicit permission from them.")
@@ -19,8 +20,14 @@ print("Make sure you trust the server! I do not control any of them and am not r
 server = input("What is the server URL that you'd like to connect to? (ex: https://example.com, http://localhost:5000) ")
 print("Alright! Thanks. Let the calculating begin :D (to exit, run ctrl+c or close terminal)")
 print("-------------------")
+
 global pi_val
 pi_val = None
+
+for line in urllib.request.urlopen(server + "/api/getmultiplier"):
+    multiplier = int(line.decode('utf-8'))
+    print("Multiplier from server is " + str(multiplier))
+
 try:
     def calc(n, prec):
         getcontext().prec = prec
@@ -43,9 +50,10 @@ try:
                 print(response.text)
                 replen = len(response.text)
                 pilen = len(str(pi_val))
+                finalResult = pi_val * multiplier
                 if response.text == "No clients have connected yet. Become one of the first!":
                     print("server pi doesn't exist! uploading")
-                    data = {'pi': str(pi_val)}
+                    data = {'pi': str(finalResult)}
                     print(data)
                     response = requests.post(server + "/api/postpi", data=data)
                     print(response.text)
@@ -54,7 +62,7 @@ try:
                         print("server pi length is greater than local pi length! not uploading")
                     elif pilen > replen:
                         print("local pi length longer than server pi length! uploading")
-                        data = {'pi': str(pi_val)}
+                        data = {'pi': str(finalResult)}
                         response = requests.post(server + "/api/postpi", data=data)
                         print(response.text)
             else:

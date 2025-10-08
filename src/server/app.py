@@ -8,6 +8,7 @@ app = Flask(__name__)
 load_dotenv()
 name = os.getenv("NAME")
 email = os.getenv("EMAIL")
+multi = int(os.getenv("MULTI"))
 atEmail = email.replace("@", " at ")
 safeEmail = atEmail.replace(".", " dot ")
 @app.route('/api/getpi')
@@ -24,9 +25,10 @@ def getpi():
 @app.route('/api/postpi', methods=['POST', 'GET'])
 def postpi():
     f = open("picalc/pi.txt", "r")
+    checkCorrectly = 3.14 * multi
     if request.form['pi']:
         if f.read() == "No clients have connected yet. Become one of the first!":
-            if request.form['pi'].startswith("3.14") == True:
+            if request.form['pi'].startswith(str(checkCorrectly)) == True:
                 with open("picalc/pi.txt", "w") as f:
                     f.write(request.form['pi'])
             else:
@@ -65,10 +67,7 @@ def lander():
     if request.method == 'GET':
         ver = open("ver.txt", "r")
         version = ver.read()
-        try:
-            return render_template('index.html', pi=piresult, name=name, email=safeEmail, version=version, pilen=str(pilen))
-        except:
-            return render_template('index.html', pi=piresult, name=name, email=safeEmail, version=version)
+        return render_template('index.html', pi=piresult, name=name, email=safeEmail, version=version, multi=str(multi))
     else:
         return "Please use GET to access this page."
 
@@ -98,6 +97,10 @@ def getname():
 @app.route('/api/getemail')
 def getemail():
     return safeEmail
+
+@app.route('/api/getmultiplier')
+def getMultiply():
+    return str(multi)
     
 @app.errorhandler(404)
 def page_not_found(error):
