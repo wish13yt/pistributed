@@ -43,30 +43,28 @@ try:
         return pi
 
     def upload():
+        time.sleep(1)
         while True:
-            if str(pi_val).startswith("3.14") == True:
-                print(">> checking and uploading latest calculation")
-                response = requests.get(server + "/api/getpi")
+            print(">> checking and uploading latest calculation")
+            response = requests.get(server + "/api/getpi")
+            print(response.text)
+            replen = len(response.text)
+            pilen = len(str(pi_val))
+            finalResult = pi_val * multiplier
+            if response.text == "No clients have connected yet. Become one of the first!":
+                print("server pi doesn't exist! uploading")
+                data = {'pi': str(finalResult)}
+                print(data)
+                response = requests.post(server + "/api/postpi", data=data)
                 print(response.text)
-                replen = len(response.text)
-                pilen = len(str(pi_val))
-                finalResult = pi_val * multiplier
-                if response.text == "No clients have connected yet. Become one of the first!":
-                    print("server pi doesn't exist! uploading")
+            else:
+                if replen > pilen:
+                    print("server pi length is greater than local pi length! not uploading")
+                elif pilen > replen:
+                    print("local pi length longer than server pi length! uploading")
                     data = {'pi': str(finalResult)}
-                    print(data)
                     response = requests.post(server + "/api/postpi", data=data)
                     print(response.text)
-                else:
-                    if replen > pilen:
-                        print("server pi length is greater than local pi length! not uploading")
-                    elif pilen > replen:
-                        print("local pi length longer than server pi length! uploading")
-                        data = {'pi': str(finalResult)}
-                        response = requests.post(server + "/api/postpi", data=data)
-                        print(response.text)
-            else:
-                print("pi_val not yet defined!")
             time.sleep(60)
 
     threading.Thread(target=upload, daemon=True).start()
